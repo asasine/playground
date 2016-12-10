@@ -1,0 +1,1 @@
+Shamelessly stolen from [this repo](https://github.com/tensorflow/tensorflow/blob/r0.12/tensorflow/tensorboard/README.md)
