@@ -84,7 +84,7 @@ def train():
 	W_conv2 = weight_variables([5, 5, 32, 64])
 	b_conv2 = bias_variables([64])
 	h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
-	h_pool2= max_pool_2x2(h_conv2)
+	h_pool2 = max_pool_2x2(h_conv2)
 
 	W_fc1 = weight_variables([7 * 7 * 64, 1024])
 	b_fc1 = bias_variables([1024])
@@ -112,6 +112,7 @@ def train():
 
 	result = sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0})
 	print("test accuracy %g" % result)
+	sess.close()
 
 
 def main(_):
