@@ -31,19 +31,22 @@ public class MainActivity extends Activity implements ItemFragment.OnListFragmen
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS, null);
+        mAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS, this);
         mRecyclerView.setAdapter(mAdapter);
 
     }
 
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
+        Log.i(TAG, "onListFragmentInteraction callback: " + item);
     }
 
     // Called by activity_main.xml button:onClick
     public void addDummyItem(View view) {
         // add DummyItem to DummyContent
-        Log.i(TAG, "Creating DummyItem");
+        int nextId = mAdapter.getItemCount() + 1;
+        Log.i(TAG, "Creating DummyItem " + nextId);
+        DummyContent.addItem(DummyContent.createDummyItem(nextId));
+        mAdapter.notifyDataSetChanged();
     }
 }
