@@ -14,8 +14,6 @@ import net.sasine.playground.R;
 import net.sasine.playground.fragment.dummy.DummyContent;
 import net.sasine.playground.fragment.dummy.DummyContent.DummyItem;
 
-import java.util.List;
-
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -26,8 +24,10 @@ public class ItemFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String ARG_ROW_COUNT = "row-count";
     // TODO: Customize parameters
     private int mColumnCount = 2;
+    private int mRowCount = 2;
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -39,10 +39,11 @@ public class ItemFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ItemFragment newInstance(int columnCount) {
+    public static ItemFragment newInstance(int columnCount, int rowCount) {
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(ARG_ROW_COUNT, rowCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,6 +54,7 @@ public class ItemFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            mRowCount = getArguments().getInt(ARG_ROW_COUNT);
         }
     }
 
@@ -105,6 +107,6 @@ public class ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(int itemPos, DummyItem item);
     }
 }

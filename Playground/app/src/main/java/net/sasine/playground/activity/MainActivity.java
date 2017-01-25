@@ -37,8 +37,8 @@ public class MainActivity extends Activity implements ItemFragment.OnListFragmen
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-        Log.i(TAG, "onListFragmentInteraction callback: " + item);
+    public void onListFragmentInteraction(int itemPos, DummyContent.DummyItem item) {
+        Log.i(TAG, itemPos + " selected: " + item);
     }
 
     // Called by activity_main.xml button:onClick
