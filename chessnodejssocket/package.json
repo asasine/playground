@@ -1,0 +1,24 @@
+{
+  "name": "workshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify ./frontend/index.js -o ./public/index.js",
+    "start": "npm run start:server",
+    "start:server": "node server/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chess.js": "^0.10.2",
+    "chessboardjs": "0.0.1",
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "browserify": "^14.1.0",
+    "watchify": "^3.9.0"
+  }
+}
