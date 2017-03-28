@@ -6,47 +6,30 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 
 import net.sasine.playground.R;
+import net.sasine.playground.database.DbHelper;
 import net.sasine.playground.fragment.ItemFragment;
 import net.sasine.playground.fragment.MyItemRecyclerViewAdapter;
 import net.sasine.playground.fragment.dummy.DummyContent;
 
-public class MainActivity extends Activity implements ItemFragment.OnListFragmentInteractionListener {
+import java.util.ArrayList;
+
+public class MainActivity extends Activity {
 
     private final String TAG = "MainActivity";
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    public final static String EXTRA_MESSAGE = "MESSAGE";
+    private ListView obj;
+    DbHelper mydb;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.list);
-
-        mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS, this);
-        mRecyclerView.setAdapter(mAdapter);
-
-    }
-
-    @Override
-    public void onListFragmentInteraction(int itemPos, DummyContent.DummyItem item) {
-        Log.i(TAG, itemPos + " selected: " + item);
-    }
-
-    // Called by activity_main.xml button:onClick
-    public void addDummyItem(View view) {
-        // add DummyItem to DummyContent
-        int nextId = mAdapter.getItemCount() + 1;
-        Log.i(TAG, "Creating DummyItem " + nextId);
-        DummyContent.addItem(DummyContent.createDummyItem(nextId));
-        mAdapter.notifyDataSetChanged();
+        mydb = new DbHelper(this);
+        ArrayList arrayList = mydb.getAllContacts();
     }
 }
