@@ -23,8 +23,10 @@ export default class Chart extends React.Component {
 	}
 
 	randomizeDate() {
+		var newData = randomDataSet();
+		console.log(newData);
 		this.setState({
-			data: randomDataSet()
+			data: newData
 		});
 	}
 
