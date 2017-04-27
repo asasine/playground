@@ -1,4 +1,4 @@
-// unfinished/src/components-axis.jsx
+// src/components/axis.jsx
 import React from 'react';
 var d3 = Object.assign({}, require('d3-selection'), require('d3-axis'));
 

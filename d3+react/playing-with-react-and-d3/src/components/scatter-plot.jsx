@@ -1,26 +1,30 @@
-// unfinished/src/components/scatter-plot.jsx
+// src/components/scatter-plot.jsx
 import React from 'react';
 var d3 = Object.assign({}, require('d3-scale'), require('d3-array'));
 import DataCircles from './data-circles';
 import XYAxis from './x-y-axis';
 
-const xMax = (data) => d3.max(data, (d) => d[0]);
-const yMax = (data) => d3.max(data, (d) => d[1]);
+const iMax = (data, i) => d3.max(data, d => d[i]);
 const xScale = (props) => {
 	return d3.scaleLinear()
-		.domain([0, xMax(props.data)])
-		.range([props.padding, props.width - props.padding * 2]);
+		.domain([0, iMax(props.data, 0)])
+		.range([props.styles.padding, props.styles.width - props.styles.padding * 2]);
 };
 const yScale = (props) => {
 	return d3.scaleLinear()
-		.domain([0, yMax(props.data)])
-		.range([props.height - props.padding, props.padding]);
+		.domain([0, iMax(props.data, 1)])
+		.range([props.styles.height - props.styles.padding, props.styles.padding]);
+};
+const zScale = (props) => {
+	return d3.scaleLinear()
+		.domain([0, iMax(props.data, 2)])
+		.range([1, 5]);
 };
 
 export default (props) => {
-	const scales = { xScale: xScale(props), yScale: yScale(props) };
-	return <svg width={props.width} height={props.height}>
-		<DataCircles {...props} {...scales} />
-		<XYAxis {...props} {...scales} />
+	const scales = { x: xScale(props), y: yScale(props), r: zScale(props) };
+	return <svg width={props.styles.width} height={props.styles.height}>
+		<DataCircles data={props.data} scales={scales} />
+		<XYAxis styles={props.styles} scales={scales} />
 	</svg>
 }
