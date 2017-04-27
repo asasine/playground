@@ -1,6 +1,6 @@
 // src/components/App.jsx
 import React from 'react';
-import ScatterPlot from './chart.jsx';
+import ScatterPlot from './scatter-plot.jsx';
 
 const styles = {
 	width: 500,

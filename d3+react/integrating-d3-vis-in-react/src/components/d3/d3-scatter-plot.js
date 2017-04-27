@@ -1,11 +1,12 @@
 // src/components/d3/d3-scatter-plot.js
+import { memoize } from '../../helpers.js';
 var d3 = Object.assign({}, require('d3-selection'), require('d3-scale'), require('d3-transition'));
 
 const TAG = 'd3ScatterPlot';
 
 var d3ScatterPlot = {};
 
-d3ScatterPlot.create = function (el, props, state) {
+d3ScatterPlot.create = function(el, props, state) {
 	console.log(TAG + '.create', el, props, state);
 	var svg = d3.select(el).append('svg')
 		.attr('class', 'd3')
@@ -18,7 +19,7 @@ d3ScatterPlot.create = function (el, props, state) {
 	this.update(el, state);
 };
 
-d3ScatterPlot.update = function (el, state) {
+d3ScatterPlot.update = function(el, state) {
 	console.log(TAG + '.update', el, state);
 	var scales = this._scales(el, state.domain);
 	this._drawPoints(el, scales, state.data);
@@ -28,7 +29,7 @@ d3ScatterPlot.destroy = function(el) {
 	console.log(TAG + '.destroy', el);
 };
 
-d3ScatterPlot._scales = function (el, domain) {
+d3ScatterPlot._scales = memoize(function(el, domain) {
 	console.log(TAG +'._scales', el, domain);
 	if (!domain) {
 		return null;
@@ -50,7 +51,8 @@ d3ScatterPlot._scales = function (el, domain) {
 		.domain(domain.z);
 
 	return { x: x, y: y, z: z };
-};
+});
+// d3ScatterPlot._scales = memoize(d3ScatterPlot._scales);
 
 d3ScatterPlot._drawPoints = function(el, scales, data) {
 	console.log(TAG + '._drawPoints', el, scales, data);
